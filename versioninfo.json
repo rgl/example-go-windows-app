@@ -1,10 +1,11 @@
 {
 	"StringFileInfo": {
 		"OriginalFilename": "example-go-windows-app.exe",
-		"FileDescription": "see https://github.com/rgl/example-go-windows-app",
+		"FileDescription": "Example Go Windows App",
 		"CompanyName": "example.com",
 		"LegalCopyright": "example.com",
-		"ProductName": "Example Go Windows App"
+		"ProductName": "Example Go Windows App",
+		"Comments": "see https://github.com/rgl/example-go-windows-app"
 	},
 	"FixedFileInfo": {
 		"FileFlagsMask": "3f",
