@@ -31,5 +31,6 @@ jobs:
           name: artifacts
           if-no-files-found: error
           path: |
+            example-code-signing*
             dist/
             !dist/*/*

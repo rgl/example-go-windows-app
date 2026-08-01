@@ -29,8 +29,27 @@ changelog:
 release:
   draft: false
   prerelease: auto
+  extra_files:
+    - glob: example-code-signing*
 archives:
   - formats:
       - none
 checksum:
   algorithm: sha256
+nfpms:
+  - formats: [msix]
+    maintainer: Rui Lopes <rgl@example.com>
+    homepage: https://github.com/rgl/example-go-windows-app
+    contents:
+      - src: gopher.png
+        dst: gopher.png
+    msix:
+      publisher: "CN=example.com"
+      properties:
+        display_name: Example Go Windows App
+        logo: gopher.png # see https://thesvg.org/icon/gopher
+      applications:
+        - id: ExampleGoWindowsApp
+          executable: example-go-windows-app.exe
+      signature:
+        pfx_file: example-code-signing.p12

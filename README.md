@@ -17,6 +17,15 @@ choco install -y go
 
 Execute the following commands in a MSYS2 `bash` session.
 
+Install the dependencies:
+
+```bash
+winget install --exact --id MichalTrojnara.osslsigncode
+```
+
+To use the updated `PATH` environment variable, which will now include the
+newly installed applications, exit the shell session, and open a new one.
+
 Build and execute the application:
 
 ```bash
@@ -39,6 +48,35 @@ Show the executable version information:
 pwsh -Command '(Get-Item (Resolve-Path dist/*_amd64_v3/example-go-windows-app.exe)).VersionInfo | Format-List'
 ```
 
+Verify the code signature:
+
+```bash
+osslsigncode verify \
+    -in dist/*_amd64_v3/example-go-windows-app.exe \
+    -CAfile example-code-signing-ca-crt.pem
+osslsigncode verify \
+    -in dist/*_amd64v3.msix \
+    -CAfile example-code-signing-ca-crt.pem
+```
+
+Show the code signature:
+
+**NB** The signature verification will fail when your host does not trust the
+`example-code-signing` CA.
+
+```bash
+pwsh -Command 'Import-Certificate example-code-signing-ca-crt.pem -CertStoreLocation Cert:/LocalMachine/Root'
+pwsh -Command 'Get-AuthenticodeSignature (Resolve-Path dist/*_amd64_v3/example-go-windows-app.exe) | Format-List'
+pwsh -Command 'Get-AuthenticodeSignature (Resolve-Path dist/*_amd64v3.msix) | Format-List'
+```
+
+Show the msix app manifest:
+
+```bash
+unzip -p dist/*_amd64v3.msix AppxManifest.xml
+```
+
 ## References
 
+* https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/package-identity-overview
 * https://thesvg.org/icon/gopher

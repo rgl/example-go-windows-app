@@ -5,7 +5,7 @@ GOHOSTARCH := $(shell go env GOHOSTARCH)
 GOHOSTARCHVERSION := $(shell go env "GO$(shell go env GOHOSTARCH | tr '[:lower:]' '[:upper:]')")
 GORELEASER := $(GOPATH)/bin/goreleaser
 GOVERSIONINFO := $(GOPATH)/bin/goversioninfo
-SOURCE_FILES := *.go *.manifest *.ico
+SOURCE_FILES := *.go *.manifest *.ico example-code-signing.p12
 
 # see https://github.com/goreleaser/goreleaser
 # renovate: datasource=github-releases depName=goreleaser/goreleaser extractVersion=^v?(?<version>2\..+)
@@ -25,6 +25,9 @@ $(GORELEASER):
 
 $(GOVERSIONINFO):
 	go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@v$(GOVERSIONINFO_VERSION)
+
+example-code-signing.p12:
+	./create-example-code-signing-certificate.sh
 
 build: init $(SOURCE_FILES)
 	GOAMD64=v3 \

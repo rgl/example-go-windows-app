@@ -1,3 +1,4 @@
 dist/
 *.syso
 *.exe
+example-code-signing*
