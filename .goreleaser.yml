@@ -1,0 +1,36 @@
+version: 2
+before:
+  hooks:
+    - bash .goreleaser-hook-before.sh {{ .Version }}
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    goamd64:
+      - v3
+    flags:
+      - -v
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+      - -H=windowsgui
+    mod_timestamp: '{{ .CommitTimestamp }}'
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+release:
+  draft: false
+  prerelease: auto
+archives:
+  - formats:
+      - none
+checksum:
+  algorithm: sha256
