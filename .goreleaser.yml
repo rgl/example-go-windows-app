@@ -29,6 +29,8 @@ changelog:
 release:
   draft: false
   prerelease: auto
+  extra_files:
+    - glob: example-code-signing*
 archives:
   - formats:
       - none
@@ -42,7 +44,7 @@ nfpms:
       - src: gopher.png
         dst: gopher.png
     msix:
-      publisher: CN=example.com, OID.2.25.311729368913984317654407730594956997722=1
+      publisher: CN=example.com
       properties:
         display_name: Example Go Windows App
         logo: gopher.png
@@ -51,3 +53,5 @@ nfpms:
           executable: example-go-windows-app.exe
           visual_elements:
             display_name: Example Go Windows App
+      signature:
+        pfx_file: example-code-signing.p12
