@@ -36,9 +36,24 @@ make release-snapshot
 Show the executable version information:
 
 ```
-pwsh -Command '(Get-Item (Resolve-Path dist/*_amd64_v3/example-go-windows-app.exe)).VersionInfo | Format-List'
+pwsh -Command '(Get-Item dist/*_amd64_v3/example-go-windows-app.exe).VersionInfo | Format-List'
+```
+
+Show the msix application manifest:
+
+```bash
+unzip -p dist/*_amd64v3.msix AppxManifest.xml
+```
+
+Install the application:
+
+```bash
+pwsh -Command 'Add-AppxPackage dist/*_windows_amd64v3.msix -AllowUnsigned'
 ```
 
 ## References
 
+* https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/package-identity-overview
+* https://learn.microsoft.com/en-us/windows/msix/package/unsigned-package
+* https://devblogs.microsoft.com/insidemsix/is-this-a-packaged-process/
 * https://thesvg.org/icon/gopher

@@ -34,3 +34,20 @@ archives:
       - none
 checksum:
   algorithm: sha256
+nfpms:
+  - formats: [msix]
+    maintainer: Rui Lopes <rgl@example.com>
+    homepage: https://github.com/rgl/example-go-windows-app
+    contents:
+      - src: gopher.png
+        dst: gopher.png
+    msix:
+      publisher: CN=example.com, OID.2.25.311729368913984317654407730594956997722=1
+      properties:
+        display_name: Example Go Windows App
+        logo: gopher.png
+      applications:
+        - id: ExampleGoWindowsApp
+          executable: example-go-windows-app.exe
+          visual_elements:
+            display_name: Example Go Windows App

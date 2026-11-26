@@ -23,12 +23,29 @@ func main() {
 	}
 	version := info.Main.Version
 
+	packageName, err := GetCurrentPackageFullName()
+	if err != nil {
+		packageName = fmt.Sprintf("Error: %v\n", err)
+	}
+
+	packagePath, err := GetCurrentPackagePath()
+	if err != nil {
+		packagePath = fmt.Sprintf("Error: %v\n", err)
+	}
+
 	wnd := ui.NewMain(
 		ui.OptsMain().
 			ClassIconId(IDI_APPLICATION).
 			Title(fmt.Sprintf("Example Go Windows App %s", version)).
 			Style(co.WS_TILEDWINDOW).
 			Size(ui.Dpi(640, 80)),
+	)
+
+	ui.NewStatic(
+		wnd,
+		ui.OptsStatic().
+			Text(fmt.Sprintf("Package name: %s\nPackage path: %s\n", packageName, packagePath)).
+			Position(ui.Dpi(10, 10)),
 	)
 
 	os.Exit(wnd.RunAsMain())
